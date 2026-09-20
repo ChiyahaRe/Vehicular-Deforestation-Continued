@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "Unlicense"
+[[mods]]
+modId = "tree_overrun_sublevels"
+version = "1.21.1-0.6.0"
+displayName = "Sable Vehicular Deforestation"
+authors = "Leonardoinc22"
+logoFile = "icon.png"
+description = '''fast vehicles uproot trees into physics debris that tumbles and breaks into items, optional modes for weaker PCs!'''
+[[mixins]]
+config = "tree_overrun_sublevels.mixins.json"
+[[mixins]]
+config = "tree_overrun_sublevels.neoforge.mixins.json"
+[[dependencies."tree_overrun_sublevels"]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.219,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies."tree_overrun_sublevels"]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.tree_overrun_sublevels]]
+modId = "sable"
+type = "required"
+versionRange = "[1.2.2,)"
+ordering = "AFTER"
+side = "BOTH"

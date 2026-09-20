@@ -1,0 +1,6 @@
+{
+  "selector": "#tree_overrun_sublevels:tree_debris_core",
+  "properties": {
+    "sable:mass": 0.01
+  }
+}

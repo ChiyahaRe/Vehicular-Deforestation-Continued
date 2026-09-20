@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:beehives",
+    "#minecraft:climbable",
+    "#minecraft:wool_carpets",
+    "minecraft:moss_carpet",
+    "minecraft:cocoa",
+    "minecraft:snow"
+  ]
+}
