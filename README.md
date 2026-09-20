@@ -1,4 +1,6 @@
-# Tree Overrun Sublevels — Sable 2.0.5 compatibility fix
+# Vehicular Deforestation Continued
+
+*A Sable 2.0.5 compatibility fix for Tree Overrun Sublevels.*
 
 An unofficial compatibility patch for **Sable Vehicular Deforestation**
 (`tree_overrun_sublevels`) 1.21.1-0.6.0 by **Leonardoinc22**, updated to work with
