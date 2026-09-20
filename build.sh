@@ -17,7 +17,7 @@ MC_JAR="${MC_JAR:-$PRISM/libraries/net/minecraft/client/1.21.1-20240808.144430/c
 MODS="$PRISM/instances/$INSTANCE/minecraft/mods"
 LIBS="$PRISM/libraries"
 BUILD="${BUILD:-$PWD/build}"
-OUT="${OUT:-$PWD/tree-overrun-sublevels-1.21.1-0.6.0-sable205.jar}"
+OUT="${OUT:-$PWD/tree-overrun-sublevels-1.21.1-0.6.1.jar}"
 
 # Classes this patch changes. Everything else is copied from the original jar untouched.
 PATCHED=(
@@ -26,6 +26,11 @@ PATCHED=(
   physics/TreeLeafFragileCallback
   compat/ChainedFragileBlockCallback
   compat/TreePhysicsCompat
+)
+
+# Resources this patch changes, as paths inside src/main/resources.
+PATCHED_RESOURCES=(
+  META-INF/neoforge.mods.toml
 )
 
 rm -rf "$BUILD"
@@ -71,6 +76,9 @@ done
 # nested classes must be replaced alongside their outer class
 cp "$BUILD"/classes/dev/leo/treeoverrun/physics/TreeAssemblyQueue*.class \
    "$BUILD/jar/dev/leo/treeoverrun/physics/"
+for r in "${PATCHED_RESOURCES[@]}"; do
+  cp "src/main/resources/$r" "$BUILD/jar/$r"
+done
 
 rm -f "$OUT"
 ( cd "$BUILD/jar" && zip -q -r -X "$OUT" . )
@@ -91,5 +99,9 @@ done
 diff <(unzip -l "$ORIGINAL_JAR" | awk '{print $4}' | sort) \
      <(unzip -l "$OUT" | awk '{print $4}' | sort) > /dev/null \
   || { echo "FAIL: jar entries differ from the original" >&2; exit 1; }
+# the four-argument sable$onCollision does not exist before Sable 2.0.5, so loading against an
+# older Sable would fail at runtime rather than at dependency resolution
+unzip -p "$OUT" META-INF/neoforge.mods.toml | grep -q 'versionRange = "\[2.0.5,)"' \
+  || { echo "FAIL: the sable dependency range was not applied" >&2; exit 1; }
 
 echo "==> ok: $OUT"

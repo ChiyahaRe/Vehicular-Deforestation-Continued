@@ -3,9 +3,10 @@ loaderVersion = "[4,)"
 license = "Unlicense"
 [[mods]]
 modId = "tree_overrun_sublevels"
-version = "1.21.1-0.6.0"
-displayName = "Sable Vehicular Deforestation"
+version = "1.21.1-0.6.1"
+displayName = "Sable Vehicular Deforestation (Continued)"
 authors = "Leonardoinc22"
+credits = "Sable 2.0.5 compatibility patch by ChiyahaRe"
 logoFile = "icon.png"
 description = '''fast vehicles uproot trees into physics debris that tumbles and breaks into items, optional modes for weaker PCs!'''
 [[mixins]]
@@ -27,6 +28,6 @@ side = "BOTH"
 [[dependencies.tree_overrun_sublevels]]
 modId = "sable"
 type = "required"
-versionRange = "[1.2.2,)"
+versionRange = "[2.0.5,)"
 ordering = "AFTER"
 side = "BOTH"
