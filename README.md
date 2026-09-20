@@ -36,7 +36,7 @@ Rapier3D.step                                     ← Running Physics step（Loc
               Rapier3D.getLinearVelocity          ← Stopped Here
 ```
 
-Since it is using very little CPU, it is confirmed that the stoppage was caused by an API change.
+Since it is using very little CPU, the thread is not spinning — it is blocked. Comparing the stack against Sable's current API showed why.
 
 ### Why this happen in newer Sable?
 
