@@ -67,7 +67,9 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -411,6 +413,12 @@ final class TreeAssemblyQueue {
             return;
         }
         level.setBlock(basePos, saplingState, 3);
+        // Run the placement hook so block-entity saplings (e.g. TFC) start their growth timer now
+        // instead of treating the tree as having grown since tick 0.
+        BlockState placed = level.getBlockState(basePos);
+        if (placed.is(saplingState.getBlock())) {
+            placed.getBlock().setPlacedBy((Level)level, basePos, placed, null, new ItemStack((ItemLike)placed.getBlock()));
+        }
     }
 
     private static void dropClusterDirectly(ServerLevel level, Set<BlockPos> cluster, Map<BlockPos, BlockState> snapshots) {
